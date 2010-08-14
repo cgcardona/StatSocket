@@ -12,7 +12,7 @@ HTML5 rocks, exploit it.
 
 Authors
 -------
-Dylan Clendenin
-Carlos Cardona
-Mary Zhu
+* Dylan Clendenin
+* Carlos Cardona
+* Mary Zhu
 
