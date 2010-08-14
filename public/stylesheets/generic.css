@@ -1,0 +1,48 @@
+*{
+padding:0;
+margin:0;
+}
+
+body{
+height:700px;
+overflow:hidden;
+background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#000000), to(#FAFAFA));
+font-family: 'Yanone Kaffeesatz', serif;
+font-size: 28px;
+font-style: normal;
+font-weight: 400;
+text-shadow: none;
+text-decoration: none;
+text-transform: none;
+letter-spacing: 0em;
+word-spacing: 0em;
+line-height: 1em;
+}
+
+#header{
+width:800px;
+margin:auto;
+margin-top:50px;
+color:#ffffff;
+}
+
+#header h1{
+margin-bottom:15px;
+letter-spacing:2px;
+text-shadow: 2px 2px 2px #555;
+}
+
+#header h2{
+margin-bottom:15px;
+font-size:1em;
+letter-spacing:1px;
+}
+
+#container{
+width:800px;
+height:500px;
+background-color:#eee;
+margin:auto;
+border-radius: 15px;
+-webkit-box-shadow: 0 2px 5px #000;
+}

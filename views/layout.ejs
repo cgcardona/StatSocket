@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link  href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700" rel="stylesheet" type="text/css" >    
+    <link rel="stylesheet" href="/stylesheets/generic.css" type="text/css" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+    $(document).ready(function(){
+    	$("li").click(function() {
+    		var value = $(this).text()
+    		alert("happy")
+    	})
+    });
+    </script>
+</head>
+<body>
+        <div id="header">
+          <h1>
+            StatSockets   
+          </h1>
+          <h2>
+            Real Time Web Analytics Using HTML5 WebSockets
+          </h2>
+        </div><!--end of header div-->
+        <div id="info">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in pulvinar sapien. Fusce pulvinar massa quis augue vehicula mattis. Sed ac facilisis mauris. Nullam eu neque sed eros viverra suscipit vitae eu massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        </div>
+    <div id="container">
+        <%- body %>
+    </div><!--end of container div-->
+</body>
+</html>
