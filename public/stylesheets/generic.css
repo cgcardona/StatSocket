@@ -20,7 +20,7 @@ line-height: 1em;
 }
 
 #header{
-width:800px;
+width:1000px;
 margin:auto;
 margin-top:50px;
 color:#ffffff;
@@ -38,11 +38,47 @@ font-size:1em;
 letter-spacing:1px;
 }
 
+#info{
+width:1100px;
+margin:auto;
+margin-top:10px;
+background-color:#000;
+color:#fff;
+}
+
+#info p{
+padding:5px 10px;
+font-size:.75em;
+text-align:center;
+}
+
+#info a{
+color:#fff;
+}
+
+#info a:visited{
+color:#fff;
+}
+
+#info a:hover{
+color:#fff;
+}
+
+#info a:visited{
+color:#fff;
+}
+
 #container{
-width:800px;
-height:500px;
+width:1000px;
+height:400px;
 background-color:#eee;
 margin:auto;
 border-radius: 15px;
 -webkit-box-shadow: 0 2px 5px #000;
+}
+
+#ribbon{
+position:fixed;
+right:0;
+top:0;
 }
