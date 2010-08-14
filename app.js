@@ -42,7 +42,7 @@ app.get('/', function(req, res){
 app.post('/stats', function(req, res){
     res.render('stats.ejs', {
         locals: {
-            title: 'Stats'
+            title: 'Post Stats'
         }
     });
 });
@@ -50,7 +50,7 @@ app.post('/stats', function(req, res){
 app.get('/stats', function(req, res){
     res.render('showstats.ejs', {
         locals: {
-            title: 'These are your Nasty Stats'
+            title: 'These are your Socket Stats'
         }
     });
 });
