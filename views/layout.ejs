@@ -4,16 +4,24 @@
     <title>
         <%= title %>
     </title>
-    <link  href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700" rel="stylesheet" type="text/css" >    
+    <link  href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/stylesheets/generic.css" type="text/css" />
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
-    $(document).ready(function(){
-    	$("li").click(function() {
-    		var value = $(this).text()
-    		alert("happy")
-    	})
-    });
+      $(document).ready(function(){
+        $("*").click(function() {
+          $.ajax({
+            type: "POST",
+            url: "/stats",
+            data: {
+              clacked: $(this).attr("class")
+            },
+            success: function() {
+              // highlight animate or something cool
+            }
+          })
+        })
+      });
     </script>
 </head>
 <body>
@@ -22,15 +30,15 @@
         </a>
         <div id="header">
           <h1>
-            StatSocket   
+            StatSocket
           </h1>
           <h2>
             Real Time Web Analytics Using HTML5 WebSockets &amp; node.js
           </h2>
-        </div><!--end of header div-->
+        </div>
     <div id="container">
         <%- body %>
-    </div><!--end of container div-->
+    </div>
         <div id="info">
             <p>
             <a href="http://dev.w3.org/html5/websockets/">WebSockets</a> enable Web Pages to have two-way communication with a remote host. StatSocket is an HTML5 tool that allows you to see real time stats on your site.
