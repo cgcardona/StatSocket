@@ -57,19 +57,3 @@ app.get("/stats", function(req, res){
 app.listen(3000);
 console.log("listening on port 3000");
 
-
-
-
-// websocket guy
-var server = http.createServer(function(req, res) {
-    res.writeHead(200, {"Content-Type":"application/json"});
-    res.end();
-  }),
-  socket = websocket.listen(server);
-
-socket.on("connection", function(client) {
-  client.on("message", function() {})
-  client.on("disconnect", function() {})
-})
-
-
