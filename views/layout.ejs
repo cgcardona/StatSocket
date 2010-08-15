@@ -56,9 +56,8 @@
               		<tr>
               			<td id="one">1</td>
               			<td id="two">1</td>
-
-                			<td>1</td>
-                			<td>2</td>
+                		<td id="three">1</td>
+                	 	<td id="four">1</td>
 
                 		</tr>
 
@@ -71,6 +70,8 @@
             <a href="#" id="open" class="orange-button">Open Connection</a>
             <a href="#" id="button1" class="orange-button">Button #1</a>
             <a href="#" id="button2" class="orange-button">Button #2</a>
+            <a href="#" id="button3" class="orange-button">Button #3</a>
+            <a href="#" id="button4" class="orange-button">Button #4</a>
         </div><!--end of buttons1 div-->
     </div>
         <div id="info">
@@ -121,6 +122,7 @@
           conn.onmessage = function(evt) {
             log(evt.data);
             app.onMessage(evt.data);
+            alert(evt.data)
           };
 
           conn.onclose = function() {
@@ -136,15 +138,16 @@
       };
       var app = {
         onOpen: function(){
-        console.log("open")
+          console.log("open")
         },
         onClose: function(){
-        console.log("closed")
+          console.log("closed")
         },
-        onMessage: function(){
-        console.log("message")
+        onMessage: function(data){
+          console.log(data)
+          // update the DOM graph with data
         },
-        };
+      };
  document.getElementById("send").addEventListener("click", function(e) {
         if (conn) {
           setTimeout(function() {
@@ -160,33 +163,88 @@
 $(document).ready(function() {
 
   function increase_button_one() {
-  var first_value = $("#one").text()
-  var second_value = parseInt(first_value)
-  var third_value = second_value + 1
-  $("#one").text(third_value)
-  $('.visualize').trigger('visualizeRefresh');
+    var first_value = $("#one").text()
+    var second_value = parseInt(first_value)
+    var third_value = second_value + 1
+    $("#one").text(third_value)
+    $('.visualize').trigger('visualizeRefresh');
   }
 
   function increase_button_two() {
-  var first_value_b = $("#two").text()
-  var second_value_b = parseInt(first_value_b)
-  var third_value_b = second_value_b + 1
-  $("#two").text(third_value_b)
-  $('.visualize').trigger('visualizeRefresh');
+    var first_value_b = $("#two").text()
+    var second_value_b = parseInt(first_value_b)
+    var third_value_b = second_value_b + 1
+    $("#two").text(third_value_b)
+    $('.visualize').trigger('visualizeRefresh');
   }
 
-  $("#button1").click(function(e) {
-    if (conn) {
-      setTimeout(function() {
-         conn.send("button 1");
-         app.onMessage();
-         increase_button_one()
-       }, 0);
+  function increase_button_three() {
+    var first_value_c = $("#three").text()
+    var second_value_c = parseInt(first_value_c)
+    var third_value_c = second_value_c + 1
+    $("#three").text(third_value_c)
+    $('.visualize').trigger('visualizeRefresh');
+  }
+
+  function increase_button_four() {
+    var first_value_d = $("#four").text()
+    var second_value_d = parseInt(first_value_d)
+    var third_value_d = second_value_d + 1
+    $("#four").text(third_value_d)
+    $('.visualize').trigger('visualizeRefresh');
+  }
+
+    $("#button1").click(function(e) {
+      if (conn) {
+        setTimeout(function() {
+           conn.send("button 1");
+           app.onMessage();
+           increase_button_one()
+         }, 0);
       }
-      e.preventDefault();
-      return false;
-    }, false);
-  })
+        e.preventDefault();
+        return false;
+      }, false);      
+
+    $("#button2").click(function(e) {
+      if (conn) {
+        setTimeout(function() {
+           conn.send("button 2");
+           app.onMessage();
+           increase_button_two()
+         }, 0);
+      }
+        e.preventDefault();
+        return false;
+      }, false);
+
+    $("#button3").click(function(e) {
+      if (conn) {
+        setTimeout(function() {
+           conn.send("button 3");
+           app.onMessage();
+           increase_button_three()
+         }, 0);
+      }
+        e.preventDefault();
+        return false;
+      }, false);   
+
+    $("#button4").click(function(e) {
+      if (conn) {
+        setTimeout(function() {
+           conn.send("button 4");
+           app.onMessage();
+           increase_button_four()
+         }, 0);
+      }
+        e.preventDefault();
+        return false;
+      }, false);
+
+})
+
+
 
 
       document.getElementById("spam").addEventListener("click", function() {
