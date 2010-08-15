@@ -6,25 +6,30 @@
     </title>
     <link  href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/stylesheets/generic.css" type="text/css" />
+    <link rel="stylesheet" href="/stylesheets/visualize.css" type="text/css" />
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script>
-      $(document).ready(function(){
-        $("*").click(function() {
-          $.ajax({
-            type: "POST",
-            url: "/stats",
-            data: {
-              clacked: $(this).attr("class")
-            },
-            success: function() {
-              // highlight animate or something cool
-            }
-          })
-        })
-      });
-    </script>
+    <script src="/javascripts/visualize.jQuery.js" ></script>
+     <script>
+       $(document).ready(function(){
+           $('table').visualize()
+    //     $("*").click(function() {
+    //       $.ajax({
+    //         type: "POST",
+    //         url: "/stats",
+    //         data: {
+    //           clacked: $(this).attr("class")
+    //         },
+    //         success: function() {
+    //           // highlight animate or something cool
+    //         }
+    //       })
+    //     })
+       })
+     </script>
+
 </head>
 <body>
+
         <a href="http://github.com/cgcardona/StatSocket">
             <img src="/images/forkthis.png" id="ribbon" alt="Fork this code on Github">
         </a>
@@ -47,6 +52,135 @@
             StatSocket was created for the <a href="http://sites.google.com/site/svgtugcampout/">GTUG Campout 2010</a> by
             Dylan Clendenin, Mary Zhu, &amp; Carlos Cardona.
             </p>
+            <div id="log"></div>
         </div><!--end of info div-->
+         <script type="text/javascript">
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+      function pad(n) {
+        return n < 10 ? '0' + n.toString(10) : n.toString(10);
+      }
+
+      function timestamp() {
+        var d = new Date();
+        return [
+          d.getDate(),
+          months[d.getMonth()],
+          [ pad(d.getHours())
+          , pad(d.getMinutes())
+          , pad(d.getSeconds())
+          , (d.getTime() + "").substr( - 4, 4)
+          ].join(':')
+        ].join(' ');
+      };
+
+
+      function scrollToBottom() {
+          window.scrollBy(0, document.body.scrollHeight - document.body.scrollTop);
+      };
+
+      function log(data){
+        output_log.innerHTML += timestamp()+": "+data+"<br />";
+      }
+
+
+      var conn;
+      var output_log = document.getElementById("log");
+      var connect = function() {
+        if (window["WebSocket"]) {
+          conn = new WebSocket("ws://localhost:8000/test");
+          conn.onmessage = function(evt) {
+            log(evt.data);
+            app.onMessage(evt.data);
+          };
+
+          conn.onclose = function() {
+            log("Websocket Closed");
+            app.onClose();
+          };
+
+          conn.onopen = function() {
+            log("Websocket Opened");
+            app.onOpen();
+          };
+        }
+      };
+      var app = {
+        onOpen: function(){
+        console.log("open")
+        },
+        onClose: function(){
+        console.log("closed")
+        },
+        onMessage: function(){
+        console.log("message")
+        },
+        };
+              document.getElementById("send").addEventListener("click", function(e) {
+        if (conn) {
+          setTimeout(function() {
+            conn.send("test message");
+          }, 0);
+        }
+        e.preventDefault();
+        return false;
+      }, false);
+
+
+
+$(document).ready(function() {
+function increase_one() {
+var first_value = $("#one").text()
+var second_value = first_value + 1
+$("#one").text(second_value)
+$('.visualize').trigger('visualizeRefresh');
+}
+
+  $("#button1").click(function(e) {
+    if (conn) {
+     setTimeout(function() {
+       conn.send("button 1");
+       app.onMessage();
+       increase_one()
+     }, 0);
+    }
+    e.preventDefault();
+    return false;
+    }, false);
+  })
+
+      document.getElementById("spam").addEventListener("click", function() {
+        if (conn) {
+          for (var i = 0; i < 100000; ++i) {
+            (function(n) {
+              setTimeout(function() {
+                conn.send("t" + n);
+              }, 0);
+            })(i);
+          }
+        }
+        return false;
+      }, true);
+
+      document.getElementById("close").addEventListener("click", function(e) {
+        if (conn) {
+          conn.close();
+          conn = false;
+        }
+        e.preventDefault();
+        return false;
+      }, false);
+
+      document.getElementById("open").addEventListener("click", function(e) {
+        if (!conn) {
+          connect();
+        }
+        e.preventDefault();
+        return false;
+      }, false);
+
+      window.onload = connect;
+
+        </script>
 </body>
 </html>
