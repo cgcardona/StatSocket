@@ -29,30 +29,12 @@ app.configure("production", function(){
 
 // Routes
 app.get("/", function(req, res){
-  res.render("index.ejs", {
+  res.render("layout.ejs", {
     locals: {
       title: "SocketStats - Real Time Web Analytics Using HTML5 WebSockets"
     }
   });
 });
-
-app.post("/stats", function(req, res){
-  var clacked = req.params("clacked");
-  // store
-  // redis.incr(clacked)
-  res.redirect("/");
-});
-
-app.get("/stats", function(req, res){
-  res.render("showstats.ejs", {
-    locals: {
-      title: "These are your Socket Stats"
-    }
-  });
-});
-
-
-
 
 app.listen(3000);
 console.log("listening on port 3000");
