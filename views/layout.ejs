@@ -69,7 +69,8 @@
             <a href="#" class="orange-button" id="spam">Spam Test</a>
             <a href="#" id="close" class="blue-button">Close Connection</a>
             <a href="#" id="open" class="orange-button">Open Connection</a>
-            <a href="#" id="button1" class="  orange-button">Button #1</a>
+            <a href="#" id="button1" class="orange-button">Button #1</a>
+            <a href="#" id="button2" class="orange-button">Button #2</a>
         </div><!--end of buttons1 div-->
     </div>
         <div id="info">
@@ -144,7 +145,7 @@
         console.log("message")
         },
         };
-              document.getElementById("send").addEventListener("click", function(e) {
+ document.getElementById("send").addEventListener("click", function(e) {
         if (conn) {
           setTimeout(function() {
             conn.send("test message");
@@ -158,25 +159,35 @@
 
 $(document).ready(function() {
 
-  function increase_one() {
+  function increase_button_one() {
   var first_value = $("#one").text()
-  var second_value = first_value + "1"
-  $("#one").text(second_value)
+  var second_value = parseInt(first_value)
+  var third_value = second_value + 1
+  $("#one").text(third_value)
+  $('.visualize').trigger('visualizeRefresh');
+  }
+
+  function increase_button_two() {
+  var first_value_b = $("#two").text()
+  var second_value_b = parseInt(first_value_b)
+  var third_value_b = second_value_b + 1
+  $("#two").text(third_value_b)
   $('.visualize').trigger('visualizeRefresh');
   }
 
   $("#button1").click(function(e) {
     if (conn) {
-     setTimeout(function() {
-       conn.send("button 1");
-       app.onMessage();
-       increase_one()
-     }, 0);
-    }
-    e.preventDefault();
-    return false;
+      setTimeout(function() {
+         conn.send("button 1");
+         app.onMessage();
+         increase_button_one()
+       }, 0);
+      }
+      e.preventDefault();
+      return false;
     }, false);
   })
+
 
       document.getElementById("spam").addEventListener("click", function() {
         if (conn) {
